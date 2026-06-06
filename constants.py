@@ -4,3 +4,7 @@ fps = 60
 titulo = "OvercookTEC"
 white = (255, 255, 255)
 black = (0,0,0)
+PLAYER_SPEED = 5 
+PLAYER_WIDTH = 40
+PLAYER_HEIGHT = 40
+PLAYER_COLOR = (255, 0, 0)
