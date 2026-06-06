@@ -1,18 +1,19 @@
 import pygame 
 from constants import PLAYER_SPEED, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_COLOR
 class Player:
-    def __init__(self,x,y):
+    def __init__(self,x,y,teclas):
         self.rect = pygame.Rect(x,y, PLAYER_WIDTH, PLAYER_HEIGHT)
         self.velocidad = PLAYER_SPEED
         self.ingrediente = None
+        self.teclas = teclas
     def mover(self,keys):
-        if keys[pygame.K_LEFT]:
+        if keys[self.teclas['Izquierda']]:
             self.rect.x -= self.velocidad
-        if keys[pygame.K_RIGHT]:
+        if keys[self.teclas['Derecha']]:
             self.rect.x += self.velocidad
-        if keys[pygame.K_UP]:
+        if keys[self.teclas['Arriba']]:
             self.rect.y -= self.velocidad
-        if keys[pygame.K_DOWN]:
+        if keys[self.teclas['Abajo']]:
             self.rect.y += self.velocidad
     def recoger(self,estación):
         self.ingrediente = estación.ingrediente
