@@ -25,7 +25,7 @@ class Player: #Creamos la clase Player para representar a los chefs en el juego
         if self.rect.bottom > alto_ventana:
             self.rect.bottom = alto_ventana
     def recoger(self,estación): #El método recoger recibe una estación y recoge el ingrediente de esa estación, asignándolo al jugador
-        self.ingrediente = estación.ingrediente
+        self.ingrediente = estación.entregar()
     def soltar(self,estación): #El método soltar recibe una estación y suelta el ingrediente que el jugador tiene en esa estación
         estación.ingrediente = self.ingrediente
         self.ingrediente = None

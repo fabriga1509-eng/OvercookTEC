@@ -9,6 +9,8 @@ PLAYER_SPEED = 5
 PLAYER_WIDTH = 40
 PLAYER_HEIGHT = 40
 PLAYER_COLOR = (255, 0, 0)
+STATION_WIDTH = 50
+STATION_HEIGHT = 40
 CHEF1_TECLAS = { 
     "Arriba": pygame.K_w,
     "Abajo": pygame.K_s,
@@ -56,3 +58,10 @@ recetas = {"Japonesa":
     "Olla de carne":
         {"verduras":{"estado":"crudo","estacion":"cocina"},
         "carne":{"estado":"crudo","estacion":"olla"},}}}
+TIEMPOS_ESTACION = {
+    "freidora": {"min": 5, "max": 10},
+    "sarten":   {"min": 4, "max": 8},
+    "horno":    {"min": 8, "max": 15},
+    "olla":     {"min": 6, "max": 12}
+}
+STATION_COLOR = (150, 75, 0)
