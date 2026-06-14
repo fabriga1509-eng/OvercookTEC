@@ -1,5 +1,4 @@
 #Importamos pygame y las constantes necesarias
-import pygame
 from constants import recetas
 
 #Definimos la clase
