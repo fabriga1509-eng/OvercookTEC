@@ -23,4 +23,36 @@ CHEF2_TECLAS = {
     "Derecha": pygame.K_RIGHT,
     "Interactuar": pygame.K_p
 }
-recetas = {}
+recetas = {"Japonesa":
+    {"Sushi":
+        {"arroz":{"estado":"crudo","estacion":"cocina"},
+        "pescado":{"estado":"crudo","estacion":"cocina"},
+        "alga":{"estado":"crudo","estación":"cocina"}},
+    "Shashimi":
+        {"pescado":{"estado":"sin_cortar","Estacion":"tabla de cortar"}}},
+"Estadounidense":
+    {"Pizza":
+        {"masa":{"estado":"crudo","estacion":"cocina"},
+        "salsa":{"estado":"crudo","estacion":"cocina"},
+        "queso":{"estado":"crudo","estacion":"cocina"}},
+    "Hamburguesa": 
+        {"pan":{"Estado":"suave","estacion":"horno"},
+        "carne":{"estado":"crudo","estacion":"cocina"},
+        "lechuga":{"estado":"sin_cortar","estacion":"tabla de cortar"},
+        "tomate":{"estado":"sin_cortar","estacion":"tabla de cortar"}},
+    "Smores":
+        {"galleta":{"estado":"crudo","estacion":"horno"},
+        "malvavisco":{"estado":"crudo","estacion":"horno"},
+        "chocolate":{"estado":"crudo","estacion":"horno"}},},
+"Tica":
+    {"Pinto":
+        {"arroz viejo":{"estado":"crudo","estacion":"olla"},
+        "frijoles":{"estado":"crudo","estacion":"cocina"},
+        "huevo":{"estado":"crudo","estacion":"sarten"}},
+    "Arroz con pollo":
+        {"arroz_precocido":{"estado":"crudo","estacion":"olla"},
+        "vergetales":{"estado":"sin_cortar","estacion":"tabla de cortar"},
+        "pollo":{"estado":"crudo","estación":"cocina"}},
+    "Olla de carne":
+        {"verduras":{"estado":"crudo","estacion":"cocina"},
+        "carne":{"estado":"crudo","estacion":"olla"},}}}
