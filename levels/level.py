@@ -4,10 +4,10 @@ from constants import TIEMPO_NIVEL
 
 class Level:
     def __init__(self, num):
-        self.tiempo = TIEMPO_NIVEL
+        self.tiempo = TIEMPO_NIVEL #Modifica si es necesario Abi
         self.num = num
-        self.puntos = 0
-        self.timer = 0
+        self.puntos = 0 #Modifica si es necesario Abi
+        self.timer = 0 #Modifica si es necesario Abi
         if num == 1:
             self.rcts = [Recipe("Japonesa", "Sushi"), Recipe("Japonesa", "Shashimi")]
             self.estaciones = [Station(100, 100, "olla"),

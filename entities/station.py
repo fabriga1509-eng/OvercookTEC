@@ -20,19 +20,19 @@ class Station:
     def recibir(self, ingrediente):
         if ingrediente.estacion == self.tipo:
             self.ingrediente = ingrediente
-            self.activa = True
+            self.activa = True #Modifica si es necesario Abi
     def entregar(self):
         ingrediente = self.ingrediente
         self.ingrediente = None
         self.activa = False
         self.timer = 0
-        return ingrediente
+        return ingrediente #Modifica si es necesario Abi
     def update(self, dt):
         if self.activa and self.ingrediente is not None:
             self.timer += dt
             if self.timer >= self.tiempo_max:        # ← adentro del if self.activa
                 self.ingrediente.estado = "quemado"
             elif self.timer >= self.tiempo_min:      # ← adentro del if self.activa
-                self.ingrediente.estado = "preparado"
-    def draw(self, screen):
+                self.ingrediente.estado = "preparado" #Modifica si es necesario Abi
+    def draw(self, screen): #Modifica si es necesario Abi
         pygame.draw.rect(screen, STATION_COLOR, self.rect)
