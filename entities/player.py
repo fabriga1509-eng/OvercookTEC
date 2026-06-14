@@ -7,13 +7,13 @@ class Player: #Creamos la clase Player para representar a los chefs en el juego
         self.ingrediente = None
         self.teclas = teclas
     def mover(self,keys): #El método mover recibe las teclas presionadas y actualiza la posición del jugador en función de las teclas asignadas
-        if keys[self.teclas['Izquierda']]:
+        if keys[self.teclas['izquierda']]:
             self.rect.x -= self.velocidad
-        if keys[self.teclas['Derecha']]:
+        if keys[self.teclas['derecha']]:
             self.rect.x += self.velocidad
-        if keys[self.teclas['Arriba']]:
+        if keys[self.teclas['arriba']]:
             self.rect.y -= self.velocidad
-        if keys[self.teclas['Abajo']]:
+        if keys[self.teclas['abajo']]:
             self.rect.y += self.velocidad
         #Limitar dentro de la ventana
         if self.rect.left < 0:

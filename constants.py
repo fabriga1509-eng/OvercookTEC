@@ -12,18 +12,18 @@ PLAYER_COLOR = (255, 0, 0)
 STATION_WIDTH = 50
 STATION_HEIGHT = 40
 CHEF1_TECLAS = { 
-    "Arriba": pygame.K_w,
-    "Abajo": pygame.K_s,
-    "Izquierda": pygame.K_a,
-    "Derecha": pygame.K_d,
-    "Interactuar": pygame.K_e
+    "arriba": pygame.K_w,
+    "abajo": pygame.K_s,
+    "izquierda": pygame.K_a,
+    "derecha": pygame.K_d,
+    "interactuar": pygame.K_e
 }
 CHEF2_TECLAS = { 
-    "Arriba": pygame.K_UP,
-    "Abajo": pygame.K_DOWN,
-    "Izquierda": pygame.K_LEFT,
-    "Derecha": pygame.K_RIGHT,
-    "Interactuar": pygame.K_p
+    "arriba": pygame.K_UP,
+    "abajo": pygame.K_DOWN,
+    "izquierda": pygame.K_LEFT,
+    "derecha": pygame.K_RIGHT,
+    "interactuar": pygame.K_p
 }
 recetas = {"Japonesa":
     {"Sushi":
@@ -58,18 +58,13 @@ recetas = {"Japonesa":
     "Olla de carne":
         {"verduras":{"estado":"crudo","estacion":"cocina"},
         "carne":{"estado":"crudo","estacion":"olla"},}}}
-TIEMPOS_ESTACION = {
-    "freidora": {"min": 5, "max": 10},
-    "sarten":   {"min": 4, "max": 8},
-    "horno":    {"min": 8, "max": 15},
-    "olla":     {"min": 6, "max": 12}
-}
 STATION_COLOR = (150, 75, 0)
 TIEMPOS_ESTACION = {
     "freidora": {"min": 8,  "max": 15},
     "sarten":   {"min": 6,  "max": 12},
     "horno":    {"min": 10, "max": 18},
     "olla":     {"min": 8,  "max": 14},
-    "tabla de cortar": {"min": 4, "max": 8}
+    "tabla de cortar": {"min": 4, "max": 8},
+    "cocina":   {"min": 7,  "max": 13}
 }
 TIEMPO_NIVEL = 300
