@@ -1,10 +1,16 @@
 import pygame
-ancho_ventana = 800
-alto_ventana = 500
+import os
+ancho_ventana = 1024
+alto_ventana = 640
 fps = 60
 titulo = "OvercookTEC"
 white = (255, 255, 255)
+gray= (30,30,30)
 black = (0,0,0)
+fuente_pixel=os.path.join("assets","fuentes", "8bitOperatorPlusSC-Bold.ttf")
+fondo_menu=os.path.join("assets","imagenes","fondo_menu.png")
+boton_normal=os.path.join("assets","imagenes","FondoBotonInicio.png")
+boton_presionado=os.path.join("assets","imagenes","FondoBotonInicioPresionado.png")
 PLAYER_SPEED = 5
 PLAYER_WIDTH = 40
 PLAYER_HEIGHT = 40
@@ -32,6 +38,7 @@ recetas = {"Japonesa":
         "alga":{"estado":"crudo","estación":"cocina"}},
     "Shashimi":
         {"pescado":{"estado":"sin_cortar","estacion":"tabla de cortar"}}},
+
 "Gringa":
     {"Pizza":
         {"masa":{"estado":"crudo","estacion":"cocina"},
@@ -46,6 +53,7 @@ recetas = {"Japonesa":
         {"galleta":{"estado":"crudo","estacion":"horno"},
         "malvavisco":{"estado":"crudo","estacion":"horno"},
         "chocolate":{"estado":"crudo","estacion":"horno"}},},
+
 "Tica":
     {"Pinto":
         {"arroz":{"estado":"crudo","estacion":"olla"},
@@ -58,6 +66,7 @@ recetas = {"Japonesa":
     "Olla de carne":
         {"verduras":{"estado":"crudo","estacion":"cocina"},
         "carne":{"estado":"crudo","estacion":"olla"},}}}
+
 STATION_COLOR = (150, 75, 0)
 TIEMPOS_ESTACION = {
     "freidora": {"min": 8,  "max": 15},
