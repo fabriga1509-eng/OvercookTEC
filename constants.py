@@ -41,10 +41,103 @@ CHEF2_TECLAS = {
     "derecha": pygame.K_RIGHT,
     "interactuar": pygame.K_p
 }
+SPRITES_INGREDIENTES={
+    "arroz": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "_quemado.png")
+
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+    "pescado_sushi": {
+        "crudo": os.path.join("assets", "imagenes", "arroz_crudo.png"),
+        "preparado": os.path.join("assets", "imagenes", "arroz_cocido.png"),
+        "quemado": os.path.join("assets", "imagenes", "arroz_quemado.png")
+    },
+}
 recetas = {"Japonesa":
     {"Sushi":
         {"arroz":{"estado":"crudo","estacion":"olla"},
-        "pescado_sushi":{"estado":"crudo","estacion":"sarten"},
+        "pescado_sushi":{"estado":"sin_cortar","estacion":"tabla de cortar"},
         "alga":{"estado":"crudo","estación":"sarten"}},
     "Shashimi":
         {"pescado":{"estado":"sin_cortar","estacion":"tabla de cortar"}}},

@@ -19,8 +19,8 @@ class Level:
         self.usar_suelo = False
 
         try:
-            self.img_suelo = pygame.image.load(fondo_japones).convert_alpha()
-            self.img_suelo = pygame.transform.scale(self.img_suelo, (STATION_WIDTH, STATION_HEIGHT))
+            self.fondo_japones = pygame.image.load(fondo_japones).convert()
+            self.fondo_japones = pygame.transform.scale(self.fondo_japones, (ancho_ventana, alto_ventana))
             self.usar_suelo = True  
         except pygame.error:
             print("No se encontró textura_suelo.png. Usando color de respaldo.")
@@ -93,16 +93,10 @@ class Level:
         self.timer += dt
 
     def draw(self, screen):
-        ancho_real=screen.get_width()
-        alto_real=screen.get_height()
-        if self.usar_suelo and self.img_suelo:
-            piso_acomodado=pygame.transform.scale(self.img_suelo,(STATION_WIDTH,STATION_HEIGHT))
-
-            for x in range(0, ancho_real, STATION_WIDTH):
-                for y in range(0, alto_real, STATION_HEIGHT):
-                    screen.blit(piso_acomodado, (x, y))
+        if self.usar_suelo and self.fondo_japones:
+            screen.blit(self.fondo_japones, (0, 0))
         else:
-            screen.fill(piso) 
+            screen.fill((30, 30, 30))
 
         for estacion in self.estaciones:
             estacion.draw(screen)
