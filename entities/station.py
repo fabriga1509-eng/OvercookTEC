@@ -17,6 +17,37 @@ class Station:
         else:
             self.tiempo_min = TIEMPOS_ESTACION[tipo]["min"]
             self.tiempo_max = TIEMPOS_ESTACION[tipo]["max"]
+        imgs_estaciones={
+        "freidora": "estacion_freidora.png",
+        "sarten":   "estacion_sarten.png",
+        "horno":    "estacion_horno.png",
+        "olla":     "estacion_olla.png",
+        "tabla de cortar": "estacion_picar.png",
+        "cocina":  "estacion_picar.png",
+        "mostrador": "estacion_pared.png"
+        }
+        # Lógica especial para los almacenes (cajas de ingredientes)
+        if self.tipo == "almacen":
+            #si es un almacén, intentamos buscar una imagen específica para ese ingrediente
+            nombre_img = f"almacen_{self.tipo_ingrediente}.png"
+        else:
+            #Si no es almacén, buscamos en el diccionario. Si no existe, usa la mesa normal
+            nombre_img = imgs_estaciones.get(self.tipo, "estacion_pared.png")
+        ruta_img = os.path.join("assets", "imagenes", nombre_img)
+        try:
+            self.sprite = pygame.image.load(ruta_img).convert_alpha()
+            factor_escala = 4 
+            nuevo_ancho = 32 * factor_escala
+            nuevo_alto = 32 * factor_escala
+            #Escalamos la imagen al nuevo tamaño grande
+            self.sprite = pygame.transform.scale(self.sprite, (nuevo_ancho, nuevo_alto))
+            self.usar_sprite = True
+        except pygame.error:
+            print(f"No se pudo cargar {ruta_img}. Usando color sólido de respaldo.")
+            self.usar_sprite = False
+        if self.tipo == "mostrador":
+            pass
+        # ========================================================
     def recibir(self, ingrediente):
         if ingrediente.estacion == self.tipo:
             self.ingrediente = ingrediente
