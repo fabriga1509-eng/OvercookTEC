@@ -55,6 +55,8 @@ class Level:
                         self.estaciones.append(Station(x_pos, y_pos, "tabla de cortar"))
 
                     elif caracter == "D":
+                        estacion = Station(x_pos, y_pos, "platos")
+                        estacion.recetas = self.rcts
                         self.estaciones.append(Station(x_pos, y_pos, "platos"))
 
                     elif caracter == "E":

@@ -5,6 +5,7 @@ from entities.player import Player
 from levels.level import Level
 from entities.order import Order
 from UI.menu import MainMenu
+from entities.dish import Dish
 
 class Game:
     def __init__(self):
@@ -23,6 +24,7 @@ class Game:
         self.nivel = Level(1)
         self.estaciones = self.nivel.estaciones
         self.ordenes = []
+        self.ordenes.append(Order(self.nivel.rcts,120))
 
     def handle_events(self):
         events=pygame.event.get()
@@ -44,8 +46,14 @@ class Game:
                 if event.type == pygame.KEYDOWN:
                     if event.key == self.chef1.teclas["interactuar"]:
                         self.chef1.interactuar(self.estaciones)
+                        for estacion in self.estaciones:
+                            if (estacion.tipo == "entrega" and self.chef1.rect.colliderect(estacion.rect)):
+                                self.entregar_platillo(self.chef1)
                     if event.key == self.chef2.teclas["interactuar"]:
                         self.chef2.interactuar(self.estaciones)
+                        for estacion in self.estaciones:
+                            if (estacion.tipo == "entrega" and self.chef2.rect.colliderect(estacion.rect)):
+                                self.entregar_platillo(self.chef2)
 
     def update(self):
         dt = self.clock.get_time() / 1000
@@ -77,6 +85,18 @@ class Game:
             for estacion in self.estaciones:
                 estacion.draw(self.screen)
         pygame.display.flip()
+    def entregar_platillo(self,jugador):
+        if jugador.ingrediente is None:
+            return
+        if not isinstance(jugador.ingrediente,Dish):
+            return
+        for orden in self.ordenes:
+            if orden.verificar_entrega(jugador.ingrediente):
+                orden.completar()
+                self.nivel.puntos += 100
+                self.ordenes.remove(orden)
+                self.ordenes.append(Order(self.nivel.rcts,120))
+                jugador.ingrediente = None
 
     def run(self):
         while self.running:

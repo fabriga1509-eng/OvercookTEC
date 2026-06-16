@@ -2,6 +2,7 @@
 import pygame
 import os
 from constants import recetas, STATION_WIDTH,STATION_HEIGHT,TIEMPOS_ESTACION,STATION_COLOR
+from entities.dish import Dish
 
 #from ingredientes import 
 
@@ -13,6 +14,8 @@ class Station:
         self.ingrediente = None
         self.timer = 0
         self.activa = False
+        self.ingredientes_plato = []
+        self.recetas = []
         if tipo == "almacen":
             self.stock = 10000
             self.tipo_ingrediente = tipo_ingrediente
@@ -55,11 +58,21 @@ class Station:
             self.usar_sprite = False
         # ========================================================
     def recibir(self, ingrediente):
+        if ingrediente is None:
+            return
+        if self.tipo == "platos":
+            if ingrediente.estado == "preparado":
+                self.ingredientes_plato.append(ingrediente)
+                return True
+            return False
         if ingrediente.estacion == self.tipo:
             self.ingrediente = ingrediente
-            self.activa = True #Modifica si es necesario Abi
-
+            self.activa = True
+            return True
+        return False
     def entregar(self):
+        if self.tipo == "platos":
+            return self.crear_platillo(self.recetas)
         ingrediente = self.ingrediente
         self.ingrediente = None
         self.activa = False
@@ -80,4 +93,13 @@ class Station:
         else:
             # Si la imagen no existe, se dibuja el rectángulo original de tus compañeros
             pygame.draw.rect(screen, STATION_COLOR, self.rect)
-
+    def crear_platillo(self, recetas):
+        if self.tipo != "platos":
+            return None
+        for receta in recetas:
+            if receta.esta_completa(self.ingredientes_plato):
+                platillo = Dish(receta,self.ingredientes_plato.copy())
+                self.ingredientes_plato.clear()
+            return platillo
+        print("Ingredientes:", [i.nombre for i in self.ingredientes_plato])
+        return None

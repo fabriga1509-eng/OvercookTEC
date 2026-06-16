@@ -5,10 +5,11 @@ class Recipe: #Metodo para las recetas
         self.nombre = platillo
         self.cocina = cocina
         self.ingredientes = recetas[cocina][platillo]
-    def esta_completa(self,ingredientes_entregados):
-        for i in self.ingredientes:
-            if i not in ingredientes_entregados or self.ingredientes[i]["estado"] != "preparado":
-                return False  # si falta alguno, no está completa
-        return True  # si pasó todos, está completa
-    def _str_ (self):
-        return self.nombre
+    def esta_completa(self, ingredientes_entregados):
+        nombres = []
+        for ingrediente in ingredientes_entregados:
+            nombres.append(ingrediente.nombre)
+        for requerido in self.ingredientes:
+            if requerido not in nombres:
+                return False
+        return True

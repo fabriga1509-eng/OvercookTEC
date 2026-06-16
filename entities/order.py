@@ -1,4 +1,5 @@
 import random
+from entities.dish import Dish
 #import pygame
 
 class Order:
@@ -16,3 +17,5 @@ class Order:
         self.completada = True
     def draw(self, screen):
         pass #Te toca dibujar esto Abi 
+    def verificar_entrega(self, dish):
+        return (dish.nombre ==  self.receta.nombre)

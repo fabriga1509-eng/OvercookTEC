@@ -36,7 +36,7 @@ class Player: #Creamos la clase Player para representar a los chefs en el juego
         self.ingrediente = estación.entregar()
 
     def soltar(self,estación): #El método soltar recibe una estación y suelta el ingrediente que el jugador tiene en esa estación
-        estación.ingrediente = self.ingrediente
+        estación.recibir(self.ingrediente)
         self.ingrediente = None
 
     def interactuar(self,estaciones): #Metodo para interactuar con las estaciones
