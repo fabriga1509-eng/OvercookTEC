@@ -7,6 +7,7 @@ titulo = "OvercookTEC"
 white = (255, 255, 255)
 gray= (30,30,30)
 black = (0,0,0)
+piso=(74,42,13)
 fuente_pixel=os.path.join("assets","fuentes", "8bitOperatorPlusSC-Bold.ttf")
 
 #Fondos

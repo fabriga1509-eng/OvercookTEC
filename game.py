@@ -1,6 +1,6 @@
 import pygame
 import sys
-from constants import ancho_ventana, alto_ventana, fps, titulo, white, CHEF1_TECLAS, CHEF2_TECLAS,chef1_img,chef2_img
+from constants import ancho_ventana, alto_ventana, fps, titulo, white, CHEF1_TECLAS, CHEF2_TECLAS,chef1_img,chef2_img,gray
 from entities.player import Player
 from levels.level import Level
 from entities.order import Order
@@ -66,8 +66,6 @@ class Game:
                 self.running = False
 
     def draw(self):
-
-        self.screen.fill(white)
 
         if self.estado_actual=="MENU":
             self.menu.draw(self.screen)

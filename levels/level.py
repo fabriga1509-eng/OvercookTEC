@@ -4,7 +4,7 @@ from entities.recipe import Recipe
 from entities.station import Station
 from constants import (
     TIEMPO_NIVEL, STATION_WIDTH, STATION_HEIGHT, 
-    ancho_ventana, alto_ventana, MAPA_JAPONES,fondo_japones
+    ancho_ventana, alto_ventana, MAPA_JAPONES,fondo_japones,piso
 )
 
 
@@ -93,12 +93,16 @@ class Level:
         self.timer += dt
 
     def draw(self, screen):
-        if self.usar_suelo:
-            for x in range(0, ancho_ventana, STATION_WIDTH):
-                for y in range(0, alto_ventana, STATION_HEIGHT):
-                    screen.blit(self.fondo_japones, (x, y))
+        ancho_real=screen.get_width()
+        alto_real=screen.get_height()
+        if self.usar_suelo and self.img_suelo:
+            piso_acomodado=pygame.transform.scale(self.img_suelo,(STATION_WIDTH,STATION_HEIGHT))
+
+            for x in range(0, ancho_real, STATION_WIDTH):
+                for y in range(0, alto_real, STATION_HEIGHT):
+                    screen.blit(piso_acomodado, (x, y))
         else:
-            screen.fill((40, 40, 40)) 
+            screen.fill(piso) 
 
         for estacion in self.estaciones:
             estacion.draw(screen)
