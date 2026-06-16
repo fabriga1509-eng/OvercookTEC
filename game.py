@@ -1,6 +1,6 @@
 import pygame
 import sys
-from constants import ancho_ventana, alto_ventana, fps, titulo, white, CHEF1_TECLAS, CHEF2_TECLAS
+from constants import ancho_ventana, alto_ventana, fps, titulo, white, CHEF1_TECLAS, CHEF2_TECLAS,chef1_img,chef2_img
 from entities.player import Player
 from levels.level import Level
 from entities.order import Order
@@ -18,8 +18,8 @@ class Game:
         self.menu = MainMenu()
         self.estado_actual = "MENU"
 
-        self.chef1 = Player(100, 100, CHEF1_TECLAS)
-        self.chef2 = Player(200, 100, CHEF2_TECLAS)
+        self.chef1 = Player(100, 100, CHEF1_TECLAS,chef1_img)
+        self.chef2 = Player(200, 100, CHEF2_TECLAS,chef2_img)
         self.nivel = Level(1)
         self.estaciones = self.nivel.estaciones
         self.ordenes = []
@@ -73,6 +73,7 @@ class Game:
             self.menu.draw(self.screen)
 
         elif self.estado_actual=="GAME":
+            self.nivel.draw(self.screen)
             self.chef1.draw(self.screen)
             self.chef2.draw(self.screen)
             for estacion in self.estaciones:

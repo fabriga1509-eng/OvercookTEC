@@ -10,7 +10,7 @@ class MainMenu:
         self.fondo=pygame.transform.scale(self.fondo, (ancho_ventana,alto_ventana))
         
         self.fuente_opciones = pygame.font.Font(fuente_pixel,30)
-        self.boton_jugar = pygame.Rect(ancho_ventana // 2 - 140, 480, 280, 60)
+        self.boton_jugar = pygame.Rect(ancho_ventana // 2 - 140, 480, 280, 100)
         self.img_btn_normal = pygame.image.load(boton_normal).convert_alpha()
         self.img_btn_hover = pygame.image.load(boton_presionado).convert_alpha()
 
@@ -42,7 +42,7 @@ class MainMenu:
         return "MENU" 
 
     def update(self):
-        """Aquí irían animaciones del menú si las hubiera."""
+        #Futuras animaciones? No creo jajaja
         pass
 
     def draw(self, surface):
@@ -51,13 +51,12 @@ class MainMenu:
         else:
             surface.fill(gray) 
 
-        # Seleccionamos la imagen dependiendo de si el mouse está encima o no
+        #Hover del boton
         imagen_actual = self.img_btn_hover if self.hover_jugar else self.img_btn_normal
-        # Dibujamos la imagen usando la posición (x, y) de nuestro rectángulo
         surface.blit(imagen_actual, (self.boton_jugar.x, self.boton_jugar.y))
         
 
-
+        #Texto del boton
         texto_jugar = self.fuente_opciones.render("Jugar", True, (255, 255, 255))
 
         surface.blit(texto_jugar, (self.boton_jugar.centerx - texto_jugar.get_width() // 2, 
