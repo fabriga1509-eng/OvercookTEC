@@ -2,15 +2,13 @@ import pygame
 import os
 from entities.recipe import Recipe
 from entities.station import Station
-from constants import (
-    TIEMPO_NIVEL, STATION_WIDTH, STATION_HEIGHT, 
-    ancho_ventana, alto_ventana, MAPA_JAPONES,fondo_japones,piso
+from constants import ( STATION_WIDTH, STATION_HEIGHT, ancho_ventana, alto_ventana, MAPA_JAPONES,fondo_japones,MAPA_TICO,MAPA_GRINGO
 )
 
 
 class Level:
     def __init__(self, num):
-        self.tiempo = TIEMPO_NIVEL #Modifica si es necesario Abi
+        self.tiempo = 150 #Modifica si es necesario Abi
         self.num = num
         self.puntos = 0 #Modifica si es necesario Abi
         self.timer = 0 #Modifica si es necesario Abi
@@ -40,7 +38,7 @@ class Level:
                         self.estaciones.append(Station(x_pos, y_pos, "almacen", "arroz"))
 
                     elif caracter == "P":
-                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "pescado_sushi"))
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "pescadosushi"))
 
                     elif caracter == "G":
                         self.estaciones.append(Station(x_pos, y_pos, "almacen", "alga"))
@@ -59,34 +57,109 @@ class Level:
 
                     elif caracter == "E":
                         self.estaciones.append(Station(x_pos, y_pos, "entrega"))
-
+                    elif caracter == "R":
+                        self.estaciones.append(Station(x_pos, y_pos, "plato_station"))
         elif num == 2:
-            self.rcts = [Recipe("Gringa", "Pizza"), Recipe("Gringa", "Hamburguesa"), Recipe("Gringa", "Smores")]
-            self.estaciones = [Station(100, 100, "cocina"),
-                Station(200, 100, "horno"),
-                Station(300, 100, "tabla de cortar"),
-                Station(100, 200, "almacen", "masa"),
-                Station(200, 200, "almacen", "salsa"),
-                Station(300, 200, "almacen", "queso"),
-                Station(400, 200, "almacen", "pan"),
-                Station(500, 200, "almacen", "carne"),
-                Station(600, 200, "almacen", "lechuga"),
-                Station(700, 200, "almacen", "tomate"),
-                Station(100, 300, "almacen", "galleta"),
-                Station(200, 300, "almacen", "malvavisco"),
-                Station(300, 300, "almacen", "chocolate"),]
-        elif num == 3:
             self.rcts = [Recipe("Tica", "Pinto"), Recipe("Tica", "Arroz con pollo"), Recipe("Tica", "Olla de carne")]
-            self.estaciones = [Station(100, 100, "olla"),
-                Station(200, 100, "cocina"),
-                Station(300, 100, "sarten"),
-                Station(400, 100, "tabla de cortar"),
-                Station(100, 200, "almacen", "arroz"),
-                Station(200, 200, "almacen", "frijoles"),
-                Station(300, 200, "almacen", "huevo"),
-                Station(400, 200, "almacen", "verduras"),
-                Station(500, 200, "almacen", "pollo"),
-                Station(600, 200, "almacen", "carne"),]
+            for fila_idx, fila in enumerate(MAPA_TICO):
+                for col_idx, caracter in enumerate(fila):
+                    x_pos = col_idx * STATION_WIDTH
+                    y_pos = fila_idx * STATION_HEIGHT
+                    
+                    if caracter == "M":
+                        self.estaciones.append(Station(x_pos, y_pos, "mostrador"))
+
+                    elif caracter == "A":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "arroz"))
+
+                    elif caracter == "J":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "frijoles"))
+                    
+                    elif caracter == "D":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "verduras"))
+                    
+                    elif caracter == "K":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "pollo"))
+                    
+                    elif caracter == "H":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "huevo"))
+                    
+                    elif caracter == "N":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "carne"))
+
+                    elif caracter == "S":
+                        self.estaciones.append(Station(x_pos, y_pos, "sarten"))
+
+                    elif caracter == "F":
+                        self.estaciones.append(Station(x_pos, y_pos, "freidora"))
+
+                    elif caracter == "C":
+                        self.estaciones.append(Station(x_pos, y_pos, "tabla de cortar"))
+
+                    elif caracter == "O":
+                        self.estaciones.append(Station(x_pos, y_pos, "olla"))
+
+                    elif caracter == "E":
+                        self.estaciones.append(Station(x_pos, y_pos, "entrega"))
+
+                    elif caracter == "P":
+                        self.estaciones.append(Station(x_pos, y_pos, "plato_station"))
+            
+        elif num == 3:
+            self.rcts = [Recipe("Gringa", "Pizza"), Recipe("Gringa", "Hamburguesa"), Recipe("Gringa", "Papas")]
+            for fila_idx, fila in enumerate(MAPA_GRINGO):
+                for col_idx, caracter in enumerate(fila):
+                    x_pos = col_idx * STATION_WIDTH
+                    y_pos = fila_idx * STATION_HEIGHT
+                    
+                    if caracter == "M":
+                        self.estaciones.append(Station(x_pos, y_pos, "mostrador"))
+
+                    elif caracter == "D":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "masa"))
+
+                    elif caracter == "I":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "salsa"))
+
+                    elif caracter == "P":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "pan"))
+
+                    elif caracter == "N":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "carne"))
+                    
+                    elif caracter == "Q":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "queso"))
+
+                    elif caracter == "L":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "lechuga"))
+
+                    elif caracter == "T":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "tomate"))
+
+                    elif caracter == "V":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "papas"))
+                    
+                    elif caracter == "O":
+                        self.estaciones.append(Station(x_pos, y_pos, "almacen", "pollo"))
+
+                    elif caracter == "S":
+                        self.estaciones.append(Station(x_pos, y_pos, "sarten"))
+
+                    elif caracter == "F":
+                        self.estaciones.append(Station(x_pos, y_pos, "freidora"))
+
+                    elif caracter == "C":
+                        self.estaciones.append(Station(x_pos, y_pos, "tabla de cortar"))
+
+                    elif caracter == "H":
+                        self.estaciones.append(Station(x_pos, y_pos, "horno"))
+
+                    elif caracter == "E":
+                        self.estaciones.append(Station(x_pos, y_pos, "entrega"))
+
+                    elif caracter == "P":
+                        self.estaciones.append(Station(x_pos, y_pos, "plato_station"))
+        
     def tiempo_agotado(self):
         return self.timer >= self.tiempo
     def update(self, dt):
