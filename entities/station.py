@@ -1,10 +1,7 @@
-#Importamos lo necesario
 import pygame
 import os
 from constants import recetas, STATION_WIDTH,STATION_HEIGHT,TIEMPOS_ESTACION,SPRITES_INGREDIENTES,TRANSICIONES_ESTACIONES,imgs_estaciones,fuente_pixel
 from entities.dish import Dish
-#from ingredientes import 
-
 #Definimos la clase station
 class Station:
     def __init__(self,x,y,tipo,tipo_ingrediente=None):
@@ -33,6 +30,7 @@ class Station:
             #buscar que estacion es, si no es ninguna es un mostrador
             nombre_img = imgs_estaciones.get(self.tipo, "estacion_pared.png")
         ruta_img = os.path.join("assets", "imagenes", nombre_img)
+
         #Trata de cargar la img si no puede pone un color solido para que no se caiga el programa
         try:
             self.sprite = pygame.image.load(ruta_img).convert_alpha()
@@ -119,14 +117,10 @@ class Station:
             screen.blit(self.sprite, (self.rect.x, self.rect.y))
         else:
             #Cuadro gris si no funciona la img para que no crashee el juego
+            print("adios")
             pygame.draw.rect(screen, (100, 100, 100), self.rect)
             pygame.draw.rect(screen, (0, 0, 0), self.rect, 2)
             
-            fuente = pygame.font.SysFont(fuente_pixel, 10, bold=True)
-            txt = fuente.render(self.tipo.upper(), True, (255, 255, 255))
-            screen.blit(txt, (self.rect.x + 2, self.rect.y + 15))
-            
-            #Texto diagnóstico para saber qué estación es
             fuente = pygame.font.SysFont(fuente_pixel, 10, bold=True)
             txt = fuente.render(self.tipo.upper(), True, (255, 255, 255))
             screen.blit(txt, (self.rect.x + 2, self.rect.y + 15))
@@ -156,7 +150,7 @@ class Station:
             else:
                 pygame.draw.rect(screen, (245, 130, 48), (centro_x, centro_y, 20, 20))
 
-        if self.tipo in ["olla", "sarten", "tabla de cortar"]: #barra de progreso
+        if self.tipo in ["olla", "sarten", "tabla de cortar","horno","freidora"]: #barra de progreso
             #posicion de la barra
             barra_ancho = 64
             barra_alto = 10

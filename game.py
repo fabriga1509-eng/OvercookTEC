@@ -1,4 +1,5 @@
 import pygame
+pygame.mixer.init()
 import sys
 import random
 from constants import ancho_ventana, alto_ventana, fps, titulo, CHEF1_TECLAS, CHEF2_TECLAS,chef1_img,chef2_img,fuente_pixel,recetas
@@ -20,6 +21,7 @@ class Game:
         # Menú
         self.menu = MainMenu()
         self.estado_actual = "MENU"
+        self.actualizar_musica("MENU")
         
         # Entidades base
         self.chef1 = Player(100, 100, CHEF1_TECLAS, chef1_img)
@@ -52,6 +54,26 @@ class Game:
         for est in self.estaciones:
             est.reset() # Llama al reset interno de la estación
 
+    def actualizar_musica(self,nuevo_estado, nivel_num=None):
+        pygame.mixer.music.stop()
+        pygame.mixer.music.unload()
+
+        if nuevo_estado == "MENU":
+            pygame.mixer.music.load("assets/sonidos/musica_menu.mp3")
+            pygame.mixer.music.play(-1)
+            pygame.mixer.music.set_volume(0.3)
+
+        elif nuevo_estado == "GAME":
+            canciones = {
+                1: "assets/sonidos/musica_japonesa.mp3",
+                2: "assets/sonidos/musica_tica.mp3",
+                3: "assets/sonidos/musica_gringa.mp3"
+            }
+            archivo = canciones.get(nivel_num, "musica/nivel_default.mp3")
+            pygame.mixer.music.load(archivo)
+            pygame.mixer.music.play(-1)
+            pygame.mixer.music.set_volume(0.3)
+
     def handle_events(self):
         events = pygame.event.get()
         for event in events:
@@ -65,6 +87,7 @@ class Game:
                 self.estado_actual = "GAME"
                 # Reiniciamos el tiempo al empezar la partida
                 self.tiempo_inicio = pygame.time.get_ticks()
+                self.actualizar_musica("GAME",self.nivel_actual)
 
         elif self.estado_actual == "GAME":
             for event in events:
@@ -156,9 +179,11 @@ class Game:
         
         self.nivel_actual += 1
         self.puntuacion = 0 
-        
+        self.actualizar_musica("GAME",self.nivel_actual)
         #Cargar el mapa nuevo
         self.cargar_nivel(self.nivel_actual)
+    
+    
 
     def draw(self):
         self.screen.fill((0, 0, 0)) 
@@ -178,18 +203,20 @@ class Game:
             self.chef1.draw(self.screen)
             self.chef2.draw(self.screen)
             
-            #Tabla de ordenes
             ancho_p = self.screen.get_width()
             margen_derecho = 20
             pos_x_hud = ancho_p - margen_derecho
             
-            fuente_hud = pygame.font.SysFont(fuente_pixel, 24, bold=True)
+            fuente_hud = pygame.font.SysFont(fuente_pixel, 32, bold=True)
+            txt_score = fuente_hud.render(f"Puntos: {self.puntuacion}", True, (197, 48, 48))
+            rect_score = txt_score.get_rect(topright=(pos_x_hud, 20))
             
-            txt_score = fuente_hud.render(f"Puntos: {self.puntuacion}", True, (255, 255, 0))
-            rect_score = txt_score.get_rect()
-            rect_score.topright = (pos_x_hud, 20)
+            # Fondo para el puntaje
+            rect_fondo_score = rect_score.inflate(10, 10)
+            pygame.draw.rect(self.screen, (0, 0, 0), rect_fondo_score) # Rectángulo negro
             self.screen.blit(txt_score, rect_score)
             
+            #Tabla de ordenes
             pos_y_inicial_ordenes = 60
             espaciado_ordenes = 90
             ancho_tarjeta_orden = 210 
@@ -201,13 +228,16 @@ class Game:
             
             #Tiempo en la otra esquna
             fuente_tiempo = pygame.font.SysFont(fuente_pixel, 36, bold=True)
-            
-            #Cambiar color a rojo si queda poco tiempo 
             color_tiempo = (255, 255, 255)
             if self.tiempo_restante < 15: color_tiempo = (231, 76, 60)
             
-            img_tiempo = fuente_tiempo.render(f" {self.tiempo_restante}", True, color_tiempo)
-            self.screen.blit(img_tiempo, (20, 20))
+            img_tiempo = fuente_tiempo.render(f"{self.tiempo_restante}", True, color_tiempo)
+            rect_tiempo = img_tiempo.get_rect(topleft=(20, 20))
+            
+            # Fondo para el tiempo
+            rect_fondo_tiempo = rect_tiempo.inflate(10, 10)
+            pygame.draw.rect(self.screen, (0, 0, 0), rect_fondo_tiempo)
+            self.screen.blit(img_tiempo, rect_tiempo)
 
         pygame.display.flip()
 
@@ -232,9 +262,12 @@ class Game:
                 if orden.receta.esta_completa(plato_chef.ingredientes):
                     self.puntuacion += orden.puntuacion
                     orden.completar() 
-                    chef.ingrediente = None 
+                    chef.ingrediente = None
+                    print("Receta completada") 
                     #Sonido de completado
                     return
+                else:
+                    print("La orden no conincide con ninguna receta.")
             
         else:
             print("Falta plato")

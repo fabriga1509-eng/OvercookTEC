@@ -48,8 +48,9 @@ class Player: #Creamos la clase Player para representar a los chefs en el juego
 
         # Solo podemos soltar si la mesa o estación está vacía
         if estación.ingrediente is None:
-            es_plato = isinstance(self.ingrediente, Dish)
-            estaciones_cocina = ["olla", "tabla de cortar", "sarten", "horno", "freido"]
+            es_plato = isinstance(self.ingrediente, Dish) or self.ingrediente == "plato_limpio"
+            
+            estaciones_cocina = ["olla", "tabla de cortar", "sarten", "horno", "freidora"]
 
             #Para que no se pueda poner  un ingrediente en una estacion que no
             if es_plato and hasattr(estación, 'tipo') and estación.tipo in estaciones_cocina:
@@ -82,6 +83,7 @@ class Player: #Creamos la clase Player para representar a los chefs en el juego
             
             #Vaciar la mano del chef
             self.ingrediente = None
+            self.timer=0
             
             #Activar la estacion
             estación.activa = True
@@ -108,7 +110,7 @@ class Player: #Creamos la clase Player para representar a los chefs en el juego
                         if len(self.ingrediente.ingredientes) < 4:
                             self.ingrediente.ingredientes.append(estacion.ingrediente)
                             self.ingrediente.verificar_receta_actual()
-                            estacion.ingrediente = None  
+                            estacion.entregar()
                             return
                         else:
                             print("El plato ya está lleno.")
@@ -116,7 +118,7 @@ class Player: #Creamos la clase Player para representar a los chefs en el juego
 
                 #Poner plato mostrador
                 if estacion.ingrediente is None and isinstance(self.ingrediente, Dish):
-                    if estacion.tipo not in ["entrega", "plato_station"]: 
+                    if estacion.tipo not in ["entrega", "plato_station","almacen"]: 
                         estacion.ingrediente = self.ingrediente 
                         self.ingrediente = None
                         return
@@ -137,16 +139,6 @@ class Player: #Creamos la clase Player para representar a los chefs en el juego
         #Dibujar lo que lleva en las manos
         if self.ingrediente is not None:
             es_plato = isinstance(self.ingrediente, Dish)
-            
-            #Comprobacion de emergencia
-            if es_plato:
-                ing_ordenados = sorted(self.ingrediente.ingredientes)
-                if ing_ordenados == sorted(['arroz_cocido', 'pescadosushi_cortado', 'alga_cortado']):
-                    self.ingrediente.receta = "Sushi"
-                elif ing_ordenados == sorted(['pescado_cortado']):
-                    self.ingrediente.receta = "Shashimi"
-                else:
-                    self.ingrediente.receta = None
 
             #Ver si el plato ya tiene una receta armada
             receta_completada = es_plato and self.ingrediente.receta is not None
@@ -184,6 +176,7 @@ class Player: #Creamos la clase Player para representar a los chefs en el juego
                                 screen.blit(img, (x_slot + 10, y_slot - 25))
                             except pygame.error:
                                 pygame.draw.rect(screen, (245, 130, 48), (x_slot + 2, y_slot + 2, t_cuadro - 6, t_cuadro - 6))
+                                print("sprite no encontrado")
             
             #Plato Completo
             else:
@@ -207,9 +200,10 @@ class Player: #Creamos la clase Player para representar a los chefs en el juego
                         imagen_item = pygame.transform.scale(imagen_item, (t_sprite, t_sprite))
                         screen.blit(imagen_item, (pos_x, pos_y))
                     except pygame.error:
-                        pygame.draw.rect(screen, (245, 130, 48), (pos_x, pos_y, 25, 25))
+                        pygame.draw.rect(screen, (245, 130, 48), (pos_x, pos_y, -6, -6))
+                        print("No se encontro la img del sprite")
                 else:
-                    pygame.draw.rect(screen, (245, 130, 48), (pos_x, pos_y, 25, 25))
+                    pygame.draw.rect(screen, (245, 130, 48), (pos_x, pos_y, -6, -6))
         #Chef
         if self.usar_sprite:
             screen.blit(self.sprite, (self.rect.x, self.rect.y))

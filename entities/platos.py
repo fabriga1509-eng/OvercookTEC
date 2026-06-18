@@ -1,4 +1,5 @@
 import pygame
+from constants import fuente_pixel
 
 class EstacionPlatos:
     def __init__(self, x, y, ancho=48, alto=48):
@@ -16,6 +17,6 @@ class EstacionPlatos:
         pygame.draw.rect(screen, (0, 0, 0), self.rect, 2) # Borde
         
         # Mini indicador visual de que es de platos
-        fuente = pygame.font.SysFont("Arial", 12, bold=True)
+        fuente = pygame.font.SysFont(fuente_pixel, 12, bold=True)
         txt = fuente.render("PLATOS", True, (255, 255, 255))
         screen.blit(txt, (self.rect.x + 2, self.rect.y + 18))

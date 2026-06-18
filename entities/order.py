@@ -1,5 +1,6 @@
 import pygame
-from constants import fuente_pixel
+pygame.mixer.init()
+from constants import fuente_pixel,RUTAreceta_perdida,RUTAtiempo_reducido,RUTAreceta_completada
 class Order:
     def __init__(self, receta_objeto): 
         self.receta = receta_objeto
@@ -26,17 +27,24 @@ class Order:
         if self.timer >= self.tiempo_limite: #Se cumple el tiempo maximo de la receta
             self.puntuacion //= 2  # La puntuación se reduce a la mitad
             self.timer = 0        # Se reinicia el reloj
+            self.tiempo_reducido=pygame.mixer.Sound(RUTAtiempo_reducido)
+            self.tiempo_reducido.play()
             
             if self.puntuacion <= 0: #si el jugador tiene puntos y se le acaba la posible puntiacion para la receta
                 self.eliminada = True
                 # Se le restan los puntos de su puntaje
-                game_manager.puntaje = max(0, game_manager.puntaje - self.valor_original)
+                game_manager.puntuacion = max(0, game_manager.puntuacion - self.valor_original)
+                self.receta_perdida=pygame.mixer.Sound(RUTAreceta_perdida)
+                self.receta_perdida.play()
+
 
     def esta_expirada(self):
         return self.puntuacion <= 0
 
     def completar(self):
         self.completada = True
+        self.receta_completada=pygame.mixer.Sound(RUTAreceta_completada)
+        self.receta_completada.play()
 
     def draw(self, screen, x, y): #Cuadro de recetas
         ancho, alto = 180, 75

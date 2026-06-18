@@ -13,11 +13,20 @@ fuente_pixel=os.path.join("assets","fuentes", "8bitOperatorPlusSC-Bold.ttf")
 #Fondos
 fondo_menu=os.path.join("assets","imagenes","fondo_menu.png")
 fondo_japones=os.path.join("assets","imagenes","PisoJaponesOscuro.png")
+fondo_tico=os.path.join("assets","imagenes","PisoTico.png")
+fondo_gringo=os.path.join("assets","imagenes","PisoGringo.png")
 
+#Efectos de sonido
+RUTAreceta_perdida="assets/sonidos/receta_perdida.mp3"
+RUTAreceta_completada="assets/sonidos/receta_completada.wav"
+RUTAtiempo_reducido="assets/sonidos/tiempo_reducido.mp3"
+RUTAsiguiente_nivel="assets/sonidos/siguiente_nivel.mp3"
 
+#Boton menu
 boton_normal=os.path.join("assets","imagenes","FondoBotonInicio.png")
 boton_presionado=os.path.join("assets","imagenes","FondoBotonInicioPresionado.png")
 
+#Sprites de los chefs
 chef1_img=os.path.join("assets","imagenes","Chef1.png")
 chef2_img=os.path.join("assets","imagenes","Chef2.png")
 
@@ -100,21 +109,24 @@ SPRITES_INGREDIENTES={
     "huevo_cocido": os.path.join("assets", "imagenes", "huevo_cocido.png"),
     "huevo_quemado": os.path.join("assets", "imagenes", "arroz_quemado.png"),
 
-    "verduras": os.path.join("assets", "imagenes", "vegetales_crudo.png"),
+    "verduras": os.path.join("assets", "imagenes", "verduras_crudo.png"),
     "verduras_cortado": os.path.join("assets", "imagenes", "verduras_cortado.png"),
+    "verduras_cocido": os.path.join("assets", "imagenes", "verduras_cocido.png"),
+    "verduras_quemado": os.path.join("assets", "imagenes", "arroz_quemado.png"),
 
     "pollo": os.path.join("assets", "imagenes", "pollo_crudo.png"),
     "pollo_cocido": os.path.join("assets", "imagenes", "pollo_cocido.png"),
     "pollo_quemado": os.path.join("assets", "imagenes", "pollo_quemado.png"),
 
     "papas": os.path.join("assets", "imagenes", "papa_crudo.png"),
-    "papas_cocido": os.path.join("assets", "imagenes", "receta_papasfritas.png"),
+    "papas_cocido": os.path.join("assets", "imagenes", "papas_cocido.png"),
     "papas_quemado": os.path.join("assets", "imagenes", "papa_quemado.png"),
 
     "plato_limpio" : os.path.join("assets", "imagenes", "plato.png"),
 
     "Sushi" : os.path.join("assets", "imagenes", "receta_pescado.png"),
     "Shashimi": os.path.join("assets", "imagenes", "receta_sashimi.png"),
+
     "Papas": os.path.join("assets", "imagenes", "receta_papasfritas.png"),
     "Pizza": os.path.join("assets", "imagenes", "receta_pizza.png"),
     "Olla de carne": os.path.join("assets", "imagenes", "receta_olladecarne.png"),
@@ -136,7 +148,7 @@ recetas = {"Japonesa":
         "salsa":{"estado":"crudo","estacion":"sarten"},
         "queso":{"estado":"crudo","estacion":"horno"}},
     "Hamburguesa": 
-        {"pan":{"estado":"suave","estacion":"horno"},
+        {"pan":{"estado":"crudo","estacion":"horno"},
         "carne":{"estado":"crudo","estacion":"sarten"},
         "lechuga":{"estado":"sin_cortar","estacion":"tabla de cortar"},
         "tomate":{"estado":"sin_cortar","estacion":"tabla de cortar"}},
@@ -148,13 +160,16 @@ recetas = {"Japonesa":
         {"arroz":{"estado":"crudo","estacion":"olla"},
         "frijoles":{"estado":"crudo","estacion":"olla"},
         "huevo":{"estado":"crudo","estacion":"sarten"}},
+
     "Arroz con pollo":
         {"arroz":{"estado":"crudo","estacion":"olla"},
         "verduras":{"estado":"sin_cortar","estacion":"tabla de cortar"},
         "pollo":{"estado":"crudo","estacion":"sarten"}},
+
     "Olla de carne":
-        {"verduras":{"estado":"crudo","estacion":"olla"},
+        {"verduras_cortado":{"estado":"crudo","estacion":"olla"},
         "carne":{"estado":"crudo","estacion":"olla"},}}}
+
 TRANSICIONES_ESTACIONES={
     "arroz":         {"listo": "arroz_cocido",   "quemado": "arroz_quemado"},
     "arroz_cocido":  {"listo": "arroz_cocido",   "quemado": "arroz_quemado"},
@@ -181,7 +196,8 @@ TRANSICIONES_ESTACIONES={
     "huevo":        {"listo": "huevo_cocido",   "quemado": "huevo_quemado"},
     "huevo_cocido":  {"listo": "huevo_cocido",   "quemado": "huevo_quemado"},
 
-    "verduras":        {"listo": "verduras_cocido",   "quemado": "verduras_quemado"},
+    "verduras":        {"listo": "verduras_cortado",   "quemado": None},
+    "verduras_cortado": {"listo": "verduras_cocido", "quemado": "verduras_quemado"},
     "verduras_cocido":        {"listo": "verduras_cocido",   "quemado": "verduras_quemado"},
 
     "pollo":        {"listo": "pollo_cocido",   "quemado": "pollo_quemado"},
@@ -216,20 +232,20 @@ MAPA_JAPONES = [
 #Mapa tico
 
 MAPA_TICO = [
-    ["A", "J", "M", "M", "P", "O", "D", ".",],
+    ["A", "J", "M", "M", "P", "O", ".", ".",],
     ["M", ".", ".", ".", ".", ".", ".", "M",],
     ["C", ".", "M", "M", "M", "H", ".", "K",],
     ["M", ".", ".", ".", ".", ".", ".", "M",],
-    ["M", ".", "S", "M", "F", "N", "E", ".",],
+    ["M", "D", "S", "M", "F", "N", "E", ".",],
 ]
 #Mapa gringo
 #'.' = Suelo, 'M' = Mostrador, 'D' = Masa, 'I' = Salsa, 'P' = Pan, 
 # 'N' = Carne. 'Q'= Queso, 'L' = Lechuga, 'T'= Tomate, 
 # 'V'= Papas, 'S'= Sarten ,'H' = Horno, 'C' = Tabla de Cortar, 'E' = Entrega, 'R' = platos
 MAPA_GRINGO = [
-    ["L", "M", "M", ".", ".", ".", ".", ".",],
-    ["P", ".", ".", "T", "R", ".", ".", "H",],
-    ["V", ".", ".", "M", "I", ".", ".", "H",],
-    [".", ".", ".", "C", "S", ".", ".", "Q",],
-    ["E", ".", ".", "M", "S", ".", ".", "M",],
+    ["L", "M", "M", ".", ".", "N", ".", ".",],
+    ["P", ".", ".", "T", "R", ".", ".", ".",],
+    ["V", ".", ".", "M", "I", "X", ".", "H",],
+    ["D", ".", "F", "C", "S", "M", ".", "Q",],
+    ["E", ".", "M", "M", "S", "M", "H", "M",],
 ]
